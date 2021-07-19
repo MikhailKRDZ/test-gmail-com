@@ -53,7 +53,7 @@ public class PostServicePage extends AbstractPage{
     }
 
     public int inboxTabGetText() {
-     String text = inboxTab.getText();
+        String text = inboxTab.getText();
         if (!text.equals("")) {
             return Integer.parseInt(text);
         }
