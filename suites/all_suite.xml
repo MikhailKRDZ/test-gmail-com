@@ -1,0 +1,7 @@
+<suite name="All test suites">
+
+    <suite-files>
+        <suite-file path="smoke.xml" />
+    </suite-files>
+
+</suite>
