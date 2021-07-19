@@ -16,7 +16,7 @@ public class WebDriverSeleniumHQPFAbstractPOTest {
     String login = "qatest.qatesttask@gmail.com";
     String password = "ghRRKJklo9769%^&*";
     String mailsTopic = "Tests Message " + new Random().nextInt();
-    String mailsBody = "Tests Body" + new Random().nextLong();
+    String mailsBody = "Tests Body " + new Random().nextLong();
 
     @BeforeMethod(alwaysRun = true)
     public void browserSetup() {
@@ -60,13 +60,13 @@ public class WebDriverSeleniumHQPFAbstractPOTest {
 
         String inboxTabNextIndex = String.valueOf(postServicePage.inboxTabGetText() + 1);
 
-         PostServicePage postServicePageWithNewMail = postServicePage
-                 .newLetterButtonClick()
-                 .feelWhomField(login)
-                 .feelTopicField(mailsTopic)
-                 .feelTextField(mailsBody)
-                 .clickSendButton()
-                 .waitNewLetterForPostService(inboxTabNextIndex);
+        PostServicePage postServicePageWithNewMail = postServicePage
+                .newLetterButtonClick()
+                .feelWhomField(login)
+                .feelTopicField(mailsTopic)
+                .feelTextField(mailsBody)
+                .clickSendButton()
+                .waitNewLetterForPostService(inboxTabNextIndex);
 
         Assert.assertTrue(postServicePageWithNewMail.userInterfaceFirstGetText().contains(mailsTopic)
                 && postServicePageWithNewMail.userInterfaceFirstGetText().contains(mailsBody), "The letter isn't received.");
