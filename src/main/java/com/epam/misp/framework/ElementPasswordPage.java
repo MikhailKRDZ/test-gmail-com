@@ -21,7 +21,6 @@ public class ElementPasswordPage extends AbstractPage {
 
     public PostServicePage nextButtonClick() {
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(elementToBeClickable(nextButton)).click();
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
         return new PostServicePage(driver);
     }
 
