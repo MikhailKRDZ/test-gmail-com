@@ -6,19 +6,23 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class PostServicePage extends AbstractPage{
 
     private String postServiceButtonLocator = "//div/a[contains(@aria-label,'%s')]";
+    private  String inboxLetterWithNumberLocator = "//span/a[contains(@href,'#inbox')][contains(@aria-label,'%s')]";
 
     @FindBy(xpath = "//div[@class='z0']/div[@role='button']")
     private WebElement newLetterButton;
 
-    @FindBy(xpath = "//span/a[contains(@href,'#inbox')]")
-    private WebElement incomingButton;
+    @FindBy(xpath = "//body[@data-awr-sg-installed='true']")
+    private WebElement pageLoadButton;
 
-    @FindBy(xpath = "//div[@class='aim ain']//a[contains(@href,'#inbox')]")
+    @FindBy(xpath = "//div[@class='UI']//tr[@class][1]")
+    private WebElement userInterfaceFirst;
+
+    @FindBy(xpath = "//a[contains(@href,'#inbox')]/parent::span/following::div[1]")
     private WebElement inboxTab;
 
     protected PostServicePage(WebDriver driver) {
@@ -35,13 +39,8 @@ public class PostServicePage extends AbstractPage{
         return new NewLetterPage(driver);
     }
 
-    public IncomingMessagesPage incomingButtonClick() {
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
-        return new IncomingMessagesPage(driver);
-    }
-
     public PostServicePage waitForPageToLoad() {
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(elementToBeClickable(incomingButton));
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(elementToBeClickable(pageLoadButton));
         return this;
     }
 
@@ -49,9 +48,25 @@ public class PostServicePage extends AbstractPage{
         return inboxTab.isDisplayed();
     }
 
+    public String userInterfaceFirstGetText() {
+        return userInterfaceFirst.getText();
+    }
+
+    public int inboxTabGetText() {
+     String text = inboxTab.getText();
+        if (!text.equals("")) {
+            return Integer.parseInt(text);
+        }
+        return 0;
+    }
+
+    public PostServicePage waitNewLetterForPostService(String number) {
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(elementToBeClickable(driver.findElement(By.xpath(String.format(inboxLetterWithNumberLocator, number)))));
+        return this;
+    }
+
     @Override
     protected AbstractPage openPage() {
         return this;
     }
-
 }

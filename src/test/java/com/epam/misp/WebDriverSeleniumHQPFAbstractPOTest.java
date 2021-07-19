@@ -1,21 +1,22 @@
 package com.epam.misp;
 
-import com.epam.misp.framework.IncomingMessagesPage;
-import com.epam.misp.framework.PostServicePage;
 import com.epam.misp.framework.AuthorizationPage;
+import com.epam.misp.framework.PostServicePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import java.util.Random;
 
 public class WebDriverSeleniumHQPFAbstractPOTest {
     private WebDriver driver;
 
     String login = "qatest.qatesttask@gmail.com";
     String password = "ghRRKJklo9769%^&*";
-    String topic = "Test Message";
+    String mailsTopic = "Tests Message " + new Random().nextInt();
+    String mailsBody = "Tests Body" + new Random().nextLong();
 
     @BeforeMethod(alwaysRun = true)
     public void browserSetup() {
@@ -37,7 +38,7 @@ public class WebDriverSeleniumHQPFAbstractPOTest {
 
     @Test(description = "Just first test, JIRA binding can be here")
     public void logoutGmailTest() {
-        final AuthorizationPage authorizationPage =new AuthorizationPage(driver)
+        final AuthorizationPage authorizationPage = new AuthorizationPage(driver)
                 .openPage()
                 .feelLoginField(login)
                 .feelPasswordField(password)
@@ -50,19 +51,25 @@ public class WebDriverSeleniumHQPFAbstractPOTest {
 
     @Test(description = "Just first test, JIRA binding can be here")
     public void writeMailTest() {
-        final IncomingMessagesPage incomingMessagesPage = new AuthorizationPage(driver)
+        PostServicePage postServicePage = new AuthorizationPage(driver)
                 .openPage()
                 .feelLoginField(login)
                 .feelPasswordField(password)
                 .nextButtonClick()
-                .newLetterButtonClick()
-                .feelWhomField(login)
-                .feelTopicField(topic)
-                .feelTextField(topic)
-                .clickSendButton()
-                .incomingButtonClick();
+                .waitForPageToLoad();
 
-        Assert.assertTrue(incomingMessagesPage.userInterfaceFirstGetText().contains(topic), "The letter isn't received.");
+        String inboxTabNextIndex = String.valueOf(postServicePage.inboxTabGetText() + 1);
+
+         PostServicePage postServicePageWithNewMail = postServicePage
+                 .newLetterButtonClick()
+                 .feelWhomField(login)
+                 .feelTopicField(mailsTopic)
+                 .feelTextField(mailsBody)
+                 .clickSendButton()
+                 .waitNewLetterForPostService(inboxTabNextIndex);
+
+        Assert.assertTrue(postServicePageWithNewMail.userInterfaceFirstGetText().contains(mailsTopic)
+                && postServicePageWithNewMail.userInterfaceFirstGetText().contains(mailsBody), "The letter isn't received.");
     }
 
     @AfterMethod(alwaysRun = true)
