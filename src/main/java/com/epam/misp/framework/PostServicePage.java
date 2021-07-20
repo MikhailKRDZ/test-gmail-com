@@ -23,6 +23,9 @@ public class PostServicePage extends AbstractPage{
     private WebElement userInterfaceFirst;
 
     @FindBy(xpath = "//a[contains(@href,'#inbox')]/parent::span/following::div[1]")
+    private WebElement inboxTabCounter;
+
+    @FindBy(xpath = "//a[contains(@href,'#inbox')]/parent::span")
     private WebElement inboxTab;
 
     protected PostServicePage(WebDriver driver) {
@@ -53,7 +56,7 @@ public class PostServicePage extends AbstractPage{
     }
 
     public int inboxTabGetText() {
-        String text = inboxTab.getText();
+        String text = inboxTabCounter.getText();
         if (!text.equals("")) {
             return Integer.parseInt(text);
         }
