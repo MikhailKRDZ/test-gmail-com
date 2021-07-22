@@ -4,7 +4,7 @@
 
     <test name="UI tests" >
         <classes>
-            <class name="com.epam.misp.WebDriverSeleniumHQPFAbstractPOTest"/>
+            <class name="com.epam.misp.WebDriverSeleniumTest"/>
         </classes>
     </test>
 
