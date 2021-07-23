@@ -57,8 +57,8 @@ public class WebDriverSeleniumTest {
                 .feelTextField(mailsBody)
                 .clickSendButton()
                 .waitNewLetterForPostService(inboxTabNextIndex);
-        Assert.assertTrue(postServicePage.userInterfaceFirstGetText().contains(mailsTopic)
-                && postServicePage.userInterfaceFirstGetText().contains(mailsBody), IConstants.notReceived);
+        Assert.assertTrue(postServicePage.userInterfaceFirstGetText().contains(mailsTopic), IConstants.notReceived);
+        Assert.assertTrue(postServicePage.userInterfaceFirstGetText().contains(mailsBody), IConstants.notReceived);
     }
 
     @AfterMethod(alwaysRun = true)
@@ -66,4 +66,5 @@ public class WebDriverSeleniumTest {
         driver.quit();
         driver = null;
     }
+
 }
