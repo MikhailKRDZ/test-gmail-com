@@ -1,4 +1,4 @@
-package service;
+package com.epam.misp.framework.service;
 
 import java.util.ResourceBundle;
 

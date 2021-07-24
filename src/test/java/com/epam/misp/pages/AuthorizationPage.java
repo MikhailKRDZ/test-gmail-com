@@ -1,4 +1,4 @@
-package com.epam.misp.framework;
+package com.epam.misp.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

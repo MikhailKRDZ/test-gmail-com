@@ -1,4 +1,4 @@
-package model;
+package com.epam.misp.framework.model;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package util;
+package com.epam.misp.framework.util;
 
 import org.apache.commons.lang3.RandomStringUtils;
 

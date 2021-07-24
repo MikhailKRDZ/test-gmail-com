@@ -1,6 +1,6 @@
-package service;
+package com.epam.misp.framework.service;
 
-import model.User;
+import com.epam.misp.framework.model.User;
 
 public class UserCreator {
     public static final String LOGIN = "login";

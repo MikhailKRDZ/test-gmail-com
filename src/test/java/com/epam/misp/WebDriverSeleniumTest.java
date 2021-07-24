@@ -1,17 +1,17 @@
 package com.epam.misp;
 
-import com.epam.misp.framework.AuthorizationPage;
-import com.epam.misp.framework.PostServicePage;
-import model.User;
+import com.epam.misp.pages.AuthorizationPage;
+import com.epam.misp.pages.PostServicePage;
+import com.epam.misp.framework.model.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import service.UserCreator;
-import util.IConstants;
-import util.RandomUtil;
+import com.epam.misp.framework.service.UserCreator;
+import com.epam.misp.framework.util.IConstants;
+import com.epam.misp.framework.util.RandomUtil;
 
 public class WebDriverSeleniumTest {
     private WebDriver driver;
